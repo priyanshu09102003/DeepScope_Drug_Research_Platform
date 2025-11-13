@@ -1,26 +1,421 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Colors */
+  --color-current: currentColor;
+  --color-transparent: transparent;
+  --color-white: #ffffff;
+  --color-black: #1c2434;
+  --color-red: #fb5454;
+  --color-black-2: #010101;
+  --color-body: #64748b;
+  --color-bodydark: #aeb7c0;
+  --color-bodydark1: #dee4ee;
+  --color-bodydark2: #8a99af;
+  --color-primary: #3c50e0;
+  --color-secondary: #80caee;
+  --color-stroke: #e2e8f0;
+  --color-gray: #eff4fb;
+  --color-graydark: #333a48;
+  --color-gray-2: #f7f9fc;
+  --color-gray-3: #fafafa;
+  --color-whiten: #f1f5f9;
+  --color-whiter: #f5f7fd;
+  --color-boxdark: #24303f;
+  --color-boxdark-2: #1a222c;
+  --color-strokedark: #2e3a47;
+  --color-form-strokedark: #3d4d60;
+  --color-form-input: #1d2a39;
+  --color-meta-1: #dc3545;
+  --color-meta-2: #eff2f7;
+  --color-meta-3: #10b981;
+  --color-meta-4: #313d4a;
+  --color-meta-5: #259ae6;
+  --color-meta-6: #ffba00;
+  --color-meta-7: #ff6766;
+  --color-meta-8: #f0950c;
+  --color-meta-9: #e5e7eb;
+  --color-meta-10: #0fadcf;
+  --color-success: #219653;
+  --color-danger: #d34053;
+  --color-warning: #ffa70b;
+
+  /* Font Families */
+  --font-family-satoshi: "Satoshi", sans-serif;
+  --font-family-inter: "Inter", sans-serif;
+  --font-family-poppins: "Poppins", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    position: relative;
+    z-index: 1;
+    background-color: var(--color-whiten);
+    font-family: var(--font-family-satoshi);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-body);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .chat-height {
+    height: calc(100vh - 8.125rem);
+  }
+
+  @media (min-width: 1024px) {
+    .chat-height {
+      height: calc(100vh - 5.625rem);
+    }
+  }
+
+  .inbox-height {
+    height: calc(100vh - 8.125rem);
+  }
+
+  @media (min-width: 1024px) {
+    .inbox-height {
+      height: calc(100vh - 5.625rem);
+    }
+  }
+}
+
+/* third-party libraries CSS */
+
+.tableCheckbox:checked ~ div span {
+  opacity: 1;
+}
+
+.tableCheckbox:checked ~ div {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+}
+
+.apexcharts-legend-text {
+  fill: var(--color-body) !important;
+}
+
+.dark .apexcharts-legend-text {
+  fill: var(--color-bodydark) !important;
+}
+
+.apexcharts-text {
+  fill: var(--color-body) !important;
+}
+
+.dark .apexcharts-text {
+  fill: var(--color-bodydark) !important;
+}
+
+.apexcharts-xcrosshairs {
+  fill: var(--color-stroke) !important;
+}
+
+.dark .apexcharts-xcrosshairs {
+  fill: var(--color-strokedark) !important;
+}
+
+.apexcharts-gridline {
+  stroke: var(--color-stroke) !important;
+}
+
+.dark .apexcharts-gridline {
+  stroke: var(--color-strokedark) !important;
+}
+
+.dark .apexcharts-series.apexcharts-pie-series path {
+  stroke: transparent !important;
+}
+
+.apexcharts-legend-series {
+  display: inline-flex !important;
+  gap: 0.375rem !important;
+}
+
+.dark .apexcharts-tooltip.apexcharts-theme-light {
+  border-color: var(--color-strokedark) !important;
+  background-color: var(--color-boxdark) !important;
+}
+
+.dark .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
+  border-color: var(--color-strokedark) !important;
+  background-color: var(--color-meta-4) !important;
+}
+
+.dark .apexcharts-xaxistooltip,
+.dark .apexcharts-yaxistooltip {
+  border-color: var(--color-meta-4) !important;
+  background-color: var(--color-meta-4) !important;
+  color: var(--color-bodydark1) !important;
+}
+
+.apexcharts-xaxistooltip-bottom:after {
+  border-bottom-color: var(--color-gray) !important;
+}
+
+.dark .apexcharts-xaxistooltip-bottom:after {
+  border-bottom-color: var(--color-meta-4) !important;
+}
+
+.apexcharts-xaxistooltip-bottom:before {
+  border-bottom-color: var(--color-gray) !important;
+}
+
+.dark .apexcharts-xaxistooltip-bottom:before {
+  border-bottom-color: var(--color-meta-4) !important;
+}
+
+.apexcharts-xaxistooltip-bottom {
+  border-radius: 0.25rem !important;
+  border: none !important;
+  background-color: var(--color-gray) !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  color: #000 !important;
+}
+
+.dark .apexcharts-xaxistooltip-bottom {
+  color: #fff !important;
+}
+
+.apexcharts-tooltip-series-group {
+  padding-left: 0.375rem !important;
+}
+
+.flatpickr-wrapper {
+  width: 100%;
+}
+
+.flatpickr-months .flatpickr-prev-month:hover svg,
+.flatpickr-months .flatpickr-next-month:hover svg {
+  fill: var(--color-primary) !important;
+}
+
+.dark .flatpickr-calendar.arrowTop:before {
+  border-bottom-color: var(--color-boxdark) !important;
+}
+
+.dark .flatpickr-calendar.arrowTop:after {
+  border-bottom-color: var(--color-boxdark) !important;
+}
+
+.flatpickr-calendar {
+  padding: 1.5rem !important;
+  width: auto !important;
+}
+
+.dark .flatpickr-calendar {
+  background-color: var(--color-boxdark) !important;
+  color: var(--color-bodydark) !important;
+  box-shadow: 1px 0 0 #313D4A, -1px 0 0 #313D4A, 0 1px 0 #313D4A, 0 -1px 0 #313D4A, 0 3px 13px rgb(0 0 0 / 8%) !important;
+}
+
+.dark .flatpickr-day {
+  color: var(--color-bodydark) !important;
+}
+
+.dark .flatpickr-day:hover {
+  border-color: var(--color-meta-4) !important;
+  background-color: var(--color-meta-4) !important;
+}
+
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+  top: 1.75rem !important;
+}
+
+.dark .flatpickr-months .flatpickr-prev-month,
+.dark .flatpickr-months .flatpickr-next-month {
+  fill: white !important;
+  color: white !important;
+}
+
+.flatpickr-months .flatpickr-prev-month.flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month.flatpickr-prev-month {
+  left: 1.75rem !important;
+}
+
+.flatpickr-months .flatpickr-prev-month.flatpickr-next-month,
+.flatpickr-months .flatpickr-next-month.flatpickr-next-month {
+  right: 1.75rem !important;
+}
+
+.dark span.flatpickr-weekday,
+.dark .flatpickr-months .flatpickr-month {
+  fill: white !important;
+  color: white !important;
+}
+
+.flatpickr-day.inRange {
+  box-shadow: -5px 0 0 #f3f4f6, 5px 0 0 #f3f4f6 !important;
+}
+
+.dark .flatpickr-day.inRange {
+  box-shadow: -5px 0 0 #313D4A, 5px 0 0 #313D4A !important;
+}
+
+.flatpickr-day.inRange,
+.flatpickr-day.prevMonthDay.inRange,
+.flatpickr-day.nextMonthDay.inRange,
+.flatpickr-day.today.inRange,
+.flatpickr-day.prevMonthDay.today.inRange,
+.flatpickr-day.nextMonthDay.today.inRange,
+.flatpickr-day:hover,
+.flatpickr-day.prevMonthDay:hover,
+.flatpickr-day.nextMonthDay:hover,
+.flatpickr-day:focus,
+.flatpickr-day.prevMonthDay:focus,
+.flatpickr-day.nextMonthDay:focus {
+  border-color: #F3F4F6 !important;
+  background-color: #F3F4F6 !important;
+}
+
+.dark .flatpickr-day.inRange,
+.dark .flatpickr-day.prevMonthDay.inRange,
+.dark .flatpickr-day.nextMonthDay.inRange,
+.dark .flatpickr-day.today.inRange,
+.dark .flatpickr-day.prevMonthDay.today.inRange,
+.dark .flatpickr-day.nextMonthDay.today.inRange,
+.dark .flatpickr-day:hover,
+.dark .flatpickr-day.prevMonthDay:hover,
+.dark .flatpickr-day.nextMonthDay:hover,
+.dark .flatpickr-day:focus,
+.dark .flatpickr-day.prevMonthDay:focus,
+.dark .flatpickr-day.nextMonthDay:focus {
+  border-color: var(--color-meta-4) !important;
+  background-color: var(--color-meta-4) !important;
+}
+
+.dark .flatpickr-day.selected,
+.dark .flatpickr-day.startRange,
+.dark .flatpickr-day.endRange {
+  color: white !important;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected.inRange,
+.flatpickr-day.startRange.inRange,
+.flatpickr-day.endRange.inRange,
+.flatpickr-day.selected:focus,
+.flatpickr-day.startRange:focus,
+.flatpickr-day.endRange:focus,
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange:hover,
+.flatpickr-day.selected.prevMonthDay,
+.flatpickr-day.startRange.prevMonthDay,
+.flatpickr-day.endRange.prevMonthDay,
+.flatpickr-day.selected.nextMonthDay,
+.flatpickr-day.startRange.nextMonthDay,
+.flatpickr-day.endRange.nextMonthDay {
+  background: #3c50e0 !important;
+  border-color: var(--color-primary) !important;
+}
+
+.flatpickr-day.selected:hover,
+.flatpickr-day.startRange:hover,
+.flatpickr-day.endRange:hover {
+  border-color: var(--color-primary) !important;
+  background-color: var(--color-primary) !important;
+}
+
+.flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
+.flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),
+.flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
+  box-shadow: -10px 0 0 #3c50e0;
+}
+
+.map-btn .jvm-zoom-btn {
+  display: flex;
+  height: 1.875rem;
+  width: 1.875rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  border: 1px solid var(--color-stroke);
+  background-color: white;
+  padding: 0;
+  padding-bottom: 0.125rem;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-body);
+}
+
+.map-btn .jvm-zoom-btn:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.dark .map-btn .jvm-zoom-btn {
+  border-color: var(--color-strokedark);
+  background-color: var(--color-meta-4);
+  color: var(--color-bodydark);
+}
+
+.dark .map-btn .jvm-zoom-btn:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.mapOne .jvm-zoom-btn {
+  bottom: 0 !important;
+  left: auto !important;
+  top: auto !important;
+}
+
+.mapOne .jvm-zoom-btn.jvm-zoomin {
+  right: 2.5rem !important;
+}
+
+.mapOne .jvm-zoom-btn.jvm-zoomout {
+  right: 0 !important;
+}
+
+.taskCheckbox:checked ~ .box span {
+  opacity: 1;
+}
+
+.taskCheckbox:checked ~ p {
+  text-decoration: line-through;
+}
+
+.taskCheckbox:checked ~ .box {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+}
+
+.dark .taskCheckbox:checked ~ .box {
+  border-color: var(--color-primary);
+}
+
+.custom-input-date::-webkit-calendar-picker-indicator {
+  background: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  appearance: none;
+}
+
+[x-cloak] {
+  display: none !important;
 }
