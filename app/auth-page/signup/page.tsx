@@ -11,6 +11,7 @@ import {
   LockIcon,
   MailIcon,
   UserIcon,
+  CheckCircle,
 } from "lucide-react";
 import { createUser } from "@/app/lib/actions/user.actions";
 
@@ -27,6 +28,7 @@ const SignUp: React.FC = () => {
 
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleInputChange = (
@@ -85,6 +87,8 @@ const SignUp: React.FC = () => {
     isSubmitting = true;
 
     setIsLoading(true);
+    setErrors(null);
+    setSuccess(null);
 
     const formError = validateForm();
     if (formError) {
@@ -93,8 +97,6 @@ const SignUp: React.FC = () => {
       isSubmitting = false;
       return;
     }
-
-    setErrors(null);
 
     try {
       let base64Image = "";
@@ -111,6 +113,12 @@ const SignUp: React.FC = () => {
       const createdUser = await createUser(newUser);
       console.log(createdUser);
 
+      // Show success message
+      setSuccess(
+        `Registration successful! A verification email has been sent to ${user.email}. Please check your inbox and verify your email address to complete the registration.`
+      );
+
+      // Reset form
       setUser({
         email: "",
         firstName: "",
@@ -122,9 +130,9 @@ const SignUp: React.FC = () => {
       });
       setImageFile(null);
       setIsLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error registering user:", error);
-      setErrors("Registration failed.");
+      setErrors(error.message || "Registration failed. Please try again.");
     } finally {
       isSubmitting = false;
       setIsLoading(false);
@@ -241,10 +249,8 @@ const SignUp: React.FC = () => {
           {/* Right side - Form */}
           <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
-              <span className="mb-1.5 block font-medium">
-                Start for Free
-              </span>
-              <h2 className="mb-9 text-4xl font-bold text-black dark:text-white ">
+            <span className="mb-1.5 block font-medium">Research without boundaries</span>
+              <h2 className="mb-9 text-3xl font-bold text-black dark:text-white ">
                 Sign Up to DeepScope
               </h2>
 
@@ -260,10 +266,10 @@ const SignUp: React.FC = () => {
                       value={user.firstName}
                       onChange={handleInputChange}
                       placeholder="Enter your first name"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-12 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
-                      <UserIcon className="h-5 w-5" />
+                    <span className="absolute right-3.5 top-1/2 -translate-y-1/2">
+                      <UserIcon className="h-5 w-5 text-gray-400" />
                     </span>
                   </div>
                 </div>
@@ -279,10 +285,10 @@ const SignUp: React.FC = () => {
                       value={user.lastName}
                       onChange={handleInputChange}
                       placeholder="Enter your last name"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-12 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
-                      <UserIcon className="h-5 w-5" />
+                    <span className="absolute right-3.5 top-1/2 -translate-y-1/2">
+                      <UserIcon className="h-5 w-5 text-gray-400" />
                     </span>
                   </div>
                 </div>
@@ -298,10 +304,10 @@ const SignUp: React.FC = () => {
                       value={user.email}
                       onChange={handleInputChange}
                       placeholder="Enter your email"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-12 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
-                      <MailIcon className="h-5 w-5" />
+                    <span className="absolute right-3.5 top-1/2 -translate-y-1/2">
+                      <MailIcon className="h-5 w-5 text-gray-400" />
                     </span>
                   </div>
                 </div>
@@ -317,10 +323,10 @@ const SignUp: React.FC = () => {
                       value={user.password}
                       onChange={handleInputChange}
                       placeholder="Enter your password"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-12 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
-                      <LockIcon className="h-5 w-5" />
+                    <span className="absolute right-3.5 top-1/2 -translate-y-1/2">
+                      <LockIcon className="h-5 w-5 text-gray-400" />
                     </span>
                   </div>
                 </div>
@@ -336,10 +342,10 @@ const SignUp: React.FC = () => {
                       value={user.confirmPassword}
                       onChange={handleInputChange}
                       placeholder="Re-enter your password"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-12 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
                     />
-                    <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400">
-                      <LockIcon className="h-5 w-5" />
+                    <span className="absolute right-3.5 top-1/2 -translate-y-1/2">
+                      <LockIcon className="h-5 w-5 text-gray-400" />
                     </span>
                   </div>
                 </div>
@@ -385,6 +391,15 @@ const SignUp: React.FC = () => {
                     </div>
                   </div>
                 </div>
+
+                {success && (
+                  <div className="mb-4 flex items-start gap-3 rounded-lg border border-green-500 bg-green-50 p-4 dark:bg-green-900/20">
+                    <CheckCircle className="h-5 w-5 flex-shrink-0 text-green-500 mt-0.5" />
+                    <p className="text-sm text-green-700 dark:text-green-400">
+                      {success}
+                    </p>
+                  </div>
+                )}
 
                 {errors && (
                   <div className="mb-4 rounded-lg bg-red bg-opacity-10 p-4 text-red">

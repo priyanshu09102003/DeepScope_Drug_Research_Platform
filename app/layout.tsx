@@ -4,7 +4,7 @@ import "./globals.css";
 import React from "react";
 
 export const metadata = {
-  title: "DeepScope-Drug Research",
+  title: "DeepScope",
   description: "Research on drugs, molecules, stability analysis and many more",
 };
 
