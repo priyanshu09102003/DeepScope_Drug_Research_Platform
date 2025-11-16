@@ -1,3 +1,4 @@
+
 import { loginUser } from "@/app/lib/actions/user.actions";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -13,7 +14,6 @@ export const handler = NextAuth({
       } as any,
       async authorize(credentials) {
         if (credentials?.email && credentials?.password) {
-          //@ts-ignore
           const user = await loginUser(credentials.email, credentials.password);
           if (user) {
             return user;

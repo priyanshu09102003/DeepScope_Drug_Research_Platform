@@ -1,12 +1,12 @@
+"use client";
+
 import "jsvectormap/dist/jsvectormap.css";
 import "flatpickr/dist/flatpickr.min.css";
 import "./globals.css";
 import React from "react";
+import { SessionProvider } from "next-auth/react";
+import { UserProvider } from "./context/UserContext";
 
-export const metadata = {
-  title: "DeepScope",
-  description: "Research on drugs, molecules, stability analysis and many more",
-};
 
 export default function RootLayout({
   children,
@@ -15,7 +15,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning={true}>{children}</body>
+      <body suppressHydrationWarning={true}>
+
+        <SessionProvider>
+          <UserProvider>
+              {children}
+          </UserProvider>
+        </SessionProvider>
+      
+      
+      </body>
     </html>
   );
 }
