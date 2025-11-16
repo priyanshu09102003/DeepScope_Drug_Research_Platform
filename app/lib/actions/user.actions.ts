@@ -81,7 +81,10 @@ export async function requestPasswordReset(email: string) {
     await connectToDatabase();
 
     const user = await User.findOne({ email });
-    if (!user) throw new Error("User not found");
+    if (!user) {
+      throw new Error("No account found with this email address. Please sign up first.");
+    }
+    
     const resetUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/reset-password?token=${user._id}`;
     await sendResetPasswordEmail(
       user.email,
@@ -179,10 +182,17 @@ export async function getUserByEmail(email: string) {
   try {
     await connectToDatabase();
     const user = await User.findOne({ email });
-    if (!user) throw new Error("User not found");
+    
+    // Return null if user not found instead of throwing error
+    if (!user) {
+      console.log(`User with email ${email} not found`);
+      return null;
+    }
 
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
-    handleError(error);
+    console.error("Error in getUserByEmail:", error);
+    // Return null instead of throwing/handling error
+    return null;
   }
 }
