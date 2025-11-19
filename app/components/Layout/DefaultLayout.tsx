@@ -41,9 +41,9 @@ export default function DefaultLayout({
                 return;
             }
 
-            // If not authenticated, redirect to signup
+            // If not authenticated, redirect to signin (changed from signup)
             if (status === "unauthenticated") {
-                router.push("/auth-page/signup");
+                router.push("/auth-page/signin"); // ✅ Changed this line
                 return;
             }
 
