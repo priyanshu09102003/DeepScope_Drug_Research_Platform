@@ -1,25 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
-import { getUserByEmail } from "@/app/lib/actions/user.actions";
 
 const ChartThree: React.FC = () => {
-  const { data: session } = useSession();
-  const [userPhoto, setUserPhoto] = useState<string>("/images/user/user-02.png");
   const [showTyping, setShowTyping] = useState<boolean>(true);
   const [showFinalMessage, setShowFinalMessage] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      if (session?.user?.email) {
-        const user = await getUserByEmail(session.user.email);
-        setUserPhoto(user.photo || "/images/user/user-02.png");
-      }
-    };
-
-    fetchUserData();
-  }, [session?.user?.email]);
 
   useEffect(() => {
     // Loop animation: show typing for 5 seconds, then show message for 10 seconds, then reset
@@ -104,7 +89,7 @@ const ChartThree: React.FC = () => {
           </div>
           <img
             className="h-10 w-10 rounded-full object-cover"
-            src={userPhoto}
+            src="/images/user/user-02.jpg"
             alt="you"
           />
         </div>
@@ -145,7 +130,7 @@ const ChartThree: React.FC = () => {
             <div className="leading-1.5 border-gray-200 dark:bg-gray-700 flex w-full max-w-[320px] flex-col rounded-e-xl rounded-es-xl bg-[#f3f4f6] p-4">
               <div className="flex items-center space-x-2 rtl:space-x-reverse mb-2">
                 <span className="text-gray-900 text-sm font-semibold dark:text-white">
-                  Sarah Chen
+                  Dr. Albert
                 </span>
               </div>
               <div className="flex space-x-1">

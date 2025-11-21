@@ -12,6 +12,7 @@
     "@rdkit/rdkit": "^2025.3.4-1.0.0",
     "@react-email/components": "^1.0.1",
     "@react-email/render": "^2.0.0",
+    "ably": "^2.14.0",
     "bcryptjs": "^3.0.3",
     "flatpickr": "^4.6.13",
     "jsvectormap": "^1.7.0",

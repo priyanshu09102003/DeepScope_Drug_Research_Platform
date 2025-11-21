@@ -6,6 +6,8 @@ import "./globals.css";
 import React from "react";
 import { SessionProvider } from "next-auth/react";
 import { UserProvider } from "./context/UserContext";
+import * as Ably from "ably";
+import { AblyProvider, ChannelProvider } from "ably/react";
 
 
 export default function RootLayout({
@@ -13,6 +15,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const client  = new Ably.Realtime({
+    key: "n2BjTA._mogWg:N0RjKCdIFq3VhjhsypSUHHi9HLVMSPApH8w9_8V-ppM"
+  });
+
   return (
     <html lang="en" suppressHydrationWarning>
       {/* <script src="https://unpkg.com/@rdkit/rdkit/dist/RDKit_minimal.js"></script> */}
@@ -20,7 +26,11 @@ export default function RootLayout({
 
         <SessionProvider>
           <UserProvider>
-              {children}
+            <AblyProvider client={client}>
+              <ChannelProvider channelName="chat-demo1">
+                  {children}
+              </ChannelProvider>
+            </AblyProvider>
           </UserProvider>
         </SessionProvider>
       
