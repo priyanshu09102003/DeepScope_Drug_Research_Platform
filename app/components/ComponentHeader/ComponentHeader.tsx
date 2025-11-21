@@ -24,6 +24,13 @@ const ComponentHeader: React.FC<ComponentHeaderProps> = ({
     }
   };
 
+  const closeModal = (modalId: string) => {
+    const modal = document.getElementById(modalId) as HTMLDialogElement;
+    if (modal) {
+      modal.close();
+    }
+  };
+
   return (
     <div className="mb-6">
       {/* Breadcrumb */}
@@ -78,6 +85,7 @@ const ComponentHeader: React.FC<ComponentHeaderProps> = ({
       <Modal
         id="my_modal_1"
         title="Add New Molecule"
+        onClose={() => closeModal("my_modal_1")}
         content={
           <>
             <form action="#">
@@ -85,11 +93,11 @@ const ComponentHeader: React.FC<ComponentHeaderProps> = ({
                 <div className="mb-4.5 flex flex-col gap-6 xl:flex-row">
                   <div className="w-full xl:w-1/2">
                     <label className="mb-3 block text-sm font-medium text-black dark:text-white">
-                      SMILS String
+                      SMILE String
                     </label>
                     <input
                       type="text"
-                      placeholder="Enter SMILS string"
+                      placeholder="Enter SMILE string"
                       className="w-full rounded-lg border-[1.5px] bg-transparent px-5 py-3 text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-gray-2 dark:bg-[#181818] dark:text-white dark:focus:border-primary"
                     />
                   </div>
