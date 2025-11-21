@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import { LoaderCircle, LockIcon } from "lucide-react";
 import DefaultLayout from "@/app/components/Layout/DefaultLayout";
@@ -7,7 +7,7 @@ import ComponentHeader from "../components/ComponentHeader/ComponentHeader";
 import { useRouter, useSearchParams } from "next/navigation";
 import { resetPassword } from "../lib/actions/user.actions";
 
-const ResetPasswordPage: React.FC = () => {
+const ResetPasswordForm: React.FC = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -145,6 +145,14 @@ const ResetPasswordPage: React.FC = () => {
         </div>
       </div>
     </DefaultLayout>
+  );
+};
+
+const ResetPasswordPage: React.FC = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
   );
 };
 
