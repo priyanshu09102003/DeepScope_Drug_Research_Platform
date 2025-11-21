@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CircleCheckBig } from "lucide-react";
 import DefaultLayout from "../components/Layout/DefaultLayout";
 import { verifyEmail } from "../lib/actions/user.actions";
 
-const VerifyEmailPage: React.FC = () => {
+const VerifyEmailContent: React.FC = () => {
   const [status, setStatus] = useState<"loading" | "success" | "error">(
     "loading",
   );
@@ -55,6 +55,14 @@ const VerifyEmailPage: React.FC = () => {
         )}
       </div>
     </DefaultLayout>
+  );
+};
+
+const VerifyEmailPage: React.FC = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 };
 
