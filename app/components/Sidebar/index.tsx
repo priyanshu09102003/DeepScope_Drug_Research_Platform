@@ -66,7 +66,7 @@ const menuGroups = [
       {
         icon: <Search size={25} />,
         label: "Deep Research Mode",
-        href: "https://www.google.com",
+        href: "https://deepscope-deep-research-agent.vercel.app/",
         external: true,
       },
 
