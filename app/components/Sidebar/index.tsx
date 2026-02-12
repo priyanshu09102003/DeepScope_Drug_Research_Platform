@@ -66,15 +66,15 @@ const menuGroups = [
       {
         icon: <Search size={25} />,
         label: "Deep Research Mode",
-        href: "https://www.google.com/",
+        href: "https://deepscope-deepresearch.onrender.com",
         external: true,
       },
 
        {
         icon: <Dna size={25} />,
         label: "Genomic Analysis",
-        href: "https://www.google.com",
-        external: true,
+        href: "/",
+        // external: true,
       },
 
       
